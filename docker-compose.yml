@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db.pecgtnrztplxvggtwjuj.supabase.co:5432/postgres?sslmode=require
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Supabase@7482
+      - JWT_SECRET=Y2hvb25nLWRldmVsb3BtZW50LXNlY3JldC1rZXktMjg0NzYtY29tcGxldGUtcHJvamVjdC1zdXBhYmFzZQ==
+      - FRONTEND_URL=http://localhost:5173
+    restart: always
+
+  frontend:
+    build:
+      context: ./url-shortener-react
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_URL=http://localhost:8080
+        - VITE_SUBDOMAIN_URL=http://url.localhost:5173
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: always
