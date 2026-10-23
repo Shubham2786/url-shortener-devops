@@ -8,11 +8,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db.pecgtnrztplxvggtwjuj.supabase.co:5432/postgres?sslmode=require
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=Supabase@7482
-      - JWT_SECRET=Y2hvb25nLWRldmVsb3BtZW50LXNlY3JldC1rZXktMjg0NzYtY29tcGxldGUtcHJvamVjdC1zdXBhYmFzZQ==
-      - FRONTEND_URL=http://localhost:5173
+      - SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      - JWT_SECRET: ${JWT_SECRET}
+      - FRONTEND_URL: ${FRONTEND_URL}
     restart: always
 
   frontend:
